@@ -1,6 +1,6 @@
 # README
 
-## membersテーブル
+## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -9,20 +9,24 @@
 
 ### Association
 
+- has_many :groups, through :members
+- has_many :members
 - has_many :messages
-- has_many :groups
 
 ## groupsテーブル
+
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false, foreign_key: false|
 
 ### Association
 
+- has_many :users, through :members
 - has_many :members
 - has_many :messages
 
 ## messagesテーブル
+
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null: false, foreign_key: false|
@@ -32,13 +36,13 @@
 
 ### Association
 
-- belongs_to :member
 - belongs_to :group
+- belongs_to :user
 
 
-## groups_members テーブル（groups と members の中間テーブル）
+## membersテーブル（groups_usersの中間テーブル）
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|integer|null: false, foreign_key: false|
-|member_id|integer|null: false, foreign_key: false|
+|group_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
