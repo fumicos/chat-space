@@ -35,8 +35,8 @@
 |------|----|-------|
 |text|text|null: false, foreign_key: false|
 |image|text|null: true, foreign_key: false|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 
 ### Association
 
@@ -48,8 +48,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|references|null: false, foreign_key: true|
-|user_id|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
 
 ### Association
 
