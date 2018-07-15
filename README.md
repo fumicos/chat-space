@@ -7,6 +7,10 @@
 |name|string|null: false, foreign_key: false|
 |email|string|null: false, foreign_key: false|
 
+### Index
+
+- add_index :users,  :name
+
 ### Association
 
 - has_many :groups, through :members
@@ -30,7 +34,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null: false, foreign_key: false|
-|image|text|null: false, foreign_key: false|
+|image|text|null: true, foreign_key: false|
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 
@@ -44,8 +48,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 
 ### Association
 
