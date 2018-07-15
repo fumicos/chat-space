@@ -1,12 +1,15 @@
-# DB設計
+# README
 
 ## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false, foreign_key: false, index: true|
+|name|string|null: false, foreign_key: false|
 |email|string|null: false, foreign_key: false|
 
+### Index
+
+- add_index :users,  :name
 
 ### Association
 
@@ -32,8 +35,8 @@
 |------|----|-------|
 |text|text|null: false, foreign_key: false|
 |image|text|null: true, foreign_key: false|
-|user_id|references|null: false, foreign_key: true|
-|group_id|references|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
+|group_id|integer|null: false, foreign_key: true|
 
 ### Association
 
