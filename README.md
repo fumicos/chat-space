@@ -1,11 +1,12 @@
-# README
+# DB設計
 
 ## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false, foreign_key: false|
+|name|string|null: false, foreign_key: false, index: true|
 |email|string|null: false, foreign_key: false|
+
 
 ### Association
 
@@ -30,9 +31,9 @@
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null: false, foreign_key: false|
-|image|text|null: false, foreign_key: false|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|image|text|null: true, foreign_key: false|
+|user_id|references|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
 
 ### Association
 
@@ -44,8 +45,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|group_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 
 ### Association
 
