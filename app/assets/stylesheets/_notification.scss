@@ -1,6 +1,14 @@
+@import "./variable";
+
 .notification {
-  background: $link-color;
-  color: $font-color-white;
-  width: 100vw;
-  text-align: center;
+  .notice {
+    background-color: $light_blue;
+    color: $white;
+    text-align: center;
+  }
+  .alert {
+    background-color: $alert_orange;
+    color: $white;
+    text-align: center;
+  }
 }
