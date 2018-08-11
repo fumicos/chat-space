@@ -13,8 +13,8 @@
 
 ### Association
 
-- has_many :groups, through :members
-- has_many :members
+- has_many :groups, through :groups_users
+- has_many :groups_users
 - has_many :messages
 
 ## groupsテーブル
@@ -25,8 +25,8 @@
 
 ### Association
 
-- has_many :users, through :members
-- has_many :members
+- has_many :users, through :groups_users
+- has_many :groups_users
 - has_many :messages
 
 ## messagesテーブル
@@ -44,7 +44,7 @@
 - belongs_to :user
 
 
-## membersテーブル（groups_usersの中間テーブル）
+## groups_usersの中間テーブル
 
 |Column|Type|Options|
 |------|----|-------|
