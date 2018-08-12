@@ -1,4 +1,6 @@
 .chat
   = render partial: "chat_header"
-  = render partial: "chat_messages"
+  .messages
+    %ul
+      = render partial: 'message', collection: @messages
   = render partial: "chat_form", locals: { group: @group, message: @message }

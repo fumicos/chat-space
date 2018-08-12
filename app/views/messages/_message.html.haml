@@ -1,0 +1,8 @@
+%li.message
+  .message__header
+    %p.message__member
+      = message.user.name
+      %span.message__date
+        = message.created_at.to_s(:datetime)
+  %p.message__text
+    = message.text
