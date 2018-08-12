@@ -1,3 +1,3 @@
 .wrapper
   = render partial: "sidebar"        
-  = render partial: "chat"        
+  = render partial: "chat", locals: { group: @group, message: @message }
