@@ -1,4 +1,27 @@
 .chat
-  = render partial: "chat_header"
-  = render partial: "chat_messages"
-  = render partial: "chat_form"
+  .header
+    .header__upper
+      .header__title
+        チャットグループ
+      .header__edit
+        = link_to edit_group_path(current_user), class: 'header__edit-link' do
+          Edit
+        -# = link_to "Edit", "#", class: "header__edit-link"
+    .header__members
+      %p.header__member-title
+      %ul.header__members
+        %li.member
+          - @group.users.each do |user|
+            = user.name
+
+  .messages
+    %ul
+      = render partial: 'message', collection: @messages
+  .form
+    = form_for [@group, @message] do |f|
+      =f.text_field :text, class: 'form__input form__message', placeholder: 'type a message'
+      .form__mask
+        = f.label :image, class: 'upload-label form__image' do
+          = fa_icon "picture-o"
+          = f.file_field :image, class: 'hidden', id: 'message_image'
+      = f.submit 'Send', class: 'form__submit'
