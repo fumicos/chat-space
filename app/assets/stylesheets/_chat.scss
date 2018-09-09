@@ -40,6 +40,7 @@
     padding-left: 40px;
     height: calc(100vh - 115px - 90px);
     background: #fafafa;
+    overflow-y: scroll;
     .message {
       padding: 46px 0 0;
       margin-bottom: 40px;
