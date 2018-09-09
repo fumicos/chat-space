@@ -24,4 +24,4 @@
         = f.label :image, class: 'upload-label form__image' do
           = fa_icon "picture-o"
           = f.file_field :image, class: 'hidden', id: 'message_image'
-      = f.submit 'Send', class: 'form__submit'
+      = f.submit 'Send', class: 'form__submit', data: { group_id: @group.id }
