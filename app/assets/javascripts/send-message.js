@@ -28,9 +28,14 @@ $(function () {
     })
     .done(function(data) {
       var html = buildHTML(data)
-      $(".messages ul").append(html)
+      $(".messages > ul").append(html)
       $(".form__input").val('')
-      console.log(data)
+      $('.messages').animate({
+        scrollTop: $('.messages').get(0).scrollHeight
+      }, 'fast');
+    })
+    .fail(function(err) {
+      alert('投稿に失敗しました。' + err)
     })
   })
 })
