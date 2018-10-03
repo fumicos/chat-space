@@ -1,5 +1,15 @@
 $(function () {
   function buildHTML(message) {
+    var text = (
+      (message.text)
+        ? `<p class="message__text">${message.text}</p>`
+        : ''
+    )
+    var image = (
+      (message.image)
+        ? `<img class="message__image" src="${message.image}">`
+        : ''
+    )
     var html = `<li class="message">
       <div class="message__header">
         <p class="message__member">
@@ -7,7 +17,8 @@ $(function () {
           <span class="message__date">${message.date}</span>
         </p>
       </div>
-      <p class="message__text">${message.text}</p>
+      ${text}
+      ${image}
     </li>`
     return html
   }
@@ -15,8 +26,6 @@ $(function () {
   $('#new_message').on('submit', function (e) {
     e.preventDefault()
     var formData = new FormData(this)
-    var groupId = $('.form__submit').data('group-id')
-    // var postUrl = '/groups/' + groupId + '/messages'
     var postUrl = $(this).attr('action')
     $.ajax({
       type: 'POST',

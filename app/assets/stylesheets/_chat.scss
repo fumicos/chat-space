@@ -38,12 +38,15 @@
   .messages {
     padding-right: 40px;
     padding-left: 40px;
+    margin-bottom: 40px;
     height: calc(100vh - 115px - 90px);
     background: #fafafa;
     overflow-y: scroll;
     .message {
       padding: 46px 0 0;
-      margin-bottom: 40px;
+      &__header {
+        margin-bottom: 5px;
+      }
       &__member {
         font-size: 16px;
         font-weight: bold;
@@ -55,7 +58,12 @@
       }
       &__text {
         font-size: 14px;
+        margin-bottom: 5px;
         color: $message-text-color;
+      }
+      &__image {
+        display: block;
+        width: 200px;
       }
     }
   }
