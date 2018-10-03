@@ -17,8 +17,19 @@ $(function () {
     return html
   }
 
-  $('#user-search-field').on('keyup', function(e) {
-    $("#chat-group-users").empty()
+  function buildAppendedHtml(user) {
+    var html = `
+    <div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
+      <input name='group[user_ids][]' type='hidden' value='${user.id}'>
+      <p class='chat-group-user__name'>${user.name}</p>
+      <a class='user-search-remove chat-group-user__btn chat-group-user__btn--remove js-remove-btn'>削除</a>
+    </div>
+    `
+    return html
+  }
+
+  $('#user-search-field').on('keyup', function() {
+    $("#user-search-result").empty()
     var input = $(this).val()
     $.ajax({
       type: "GET",
@@ -29,62 +40,26 @@ $(function () {
     .done(function(res) {
       res.forEach(user => {
         var html = buildHTML(user)
-        $("#chat-group-users").append(html)
+        $("#user-search-result").append(html)
       })
     })
     .fail(function(err) {
       alert(`ユーザ検索に失敗しました`)
     })
   })
-})
-// $(function () {
-//   function buildHTML(message) {
-//     var text = (
-//       (message.text)
-//         ? `<p class="message__text">${message.text}</p>`
-//         : ''
-//     )
-//     var image = (
-//       (message.image)
-//         ? `<img class="message__image" src="${message.image}">`
-//         : ''
-//     )
-//     var html = `<li class="message">
-//       <div class="message__header">
-//         <p class="message__member">
-//           ${message.user_name}
-//           <span class="message__date">${message.date}</span>
-//         </p>
-//       </div>
-//       ${text}
-//       ${image}
-//     </li>`
-//     return html
-//   }
 
-//   $('#new_message').on('submit', function (e) {
-//     e.preventDefault()
-//     var formData = new FormData(this)
-//     var postUrl = $(this).attr('action')
-//     $.ajax({
-//       type: 'POST',
-//       url: postUrl,
-//       data: formData,
-//       dataType: 'json',
-//       processData: false,
-//       contentType: false
-//     })
-//     .done(function(data) {
-//       var html = buildHTML(data)
-//       $(".messages > ul").append(html)
-//       $(".form__input").val('')
-//       $(".form__submit").attr("disabled", false)
-//       $('.messages').animate({
-//         scrollTop: $('.messages').get(0).scrollHeight
-//       }, 'fast');
-//     })
-//     .fail(function(err) {
-//       alert('投稿に失敗しました。' + err)
-//     })
-//   })
-// })
+  $('#user-search-result').on('click', '.user-search-add', function (e) {
+    // e.preventDefault()
+    var appendUser = {
+      id: $(this).data().userId,
+      name: $(this).data().userName
+    }
+    var html = buildAppendedHtml(appendUser)
+    $('#chat-group-users').append(html)
+    $(this).parent().remove()
+  })
+
+  $('#chat-group-users').on('click', '.user-search-remove', function(e){
+    $(this).parent().remove()
+  })
+})
