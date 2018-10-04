@@ -5,4 +5,5 @@
       %span.message__date
         = message.created_at.to_s(:datetime)
   %p.message__text
-    = message.text
+    = message.text if message.text.present?
+  = image_tag message.image.url, class: 'message__image' if message.image.present?
