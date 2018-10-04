@@ -50,7 +50,6 @@ $(function () {
   })
 
   $('#user-search-result').on('click', '.user-search-add', function (e) {
-    // e.preventDefault()
     var appendUser = {
       id: $(this).data().userId,
       name: $(this).data().userName
