@@ -55,9 +55,8 @@ $(function () {
           })
         })
         .fail(function(err) {
+          alert('メッセージを自動更新できませんでした。')
         })
-      } else {
-        return
       }
     } else {
       clearInterval(autoUpdateMessage)
