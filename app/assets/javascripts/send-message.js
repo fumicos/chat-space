@@ -1,4 +1,7 @@
 $(function () {
+  // ページがひらいたら、最新のメッセージを表示する。
+  scrollLatestMessage()
+
   function buildHTML(message) {
     var text = (
       (message.text)
@@ -10,7 +13,7 @@ $(function () {
         ? `<img class="message__image" src="${message.image}">`
         : ''
     )
-    var html = `<li class="message">
+    var html = `<li class="message" data-message-id="${message.id}">
       <div class="message__header">
         <p class="message__member">
           ${message.user_name}
@@ -25,6 +28,7 @@ $(function () {
 
   function appendMessage(html) {
     $(".messages > ul").append(html)
+    scrollLatestMessage()
   }
 
   function scrollLatestMessage () {
@@ -37,14 +41,24 @@ $(function () {
     var currentPage = location.pathname
     var isMessagesPage = currentPage.match(/\/groups\/\d+\/messages/)
     if (isMessagesPage) {
-      $.ajax({
-        url: currentPage,
-        dataType: 'json'
-      })
-      .done(function(res) {
-      })
-      .fail(function(err) {
-      })
+      if($('.message').length > 0) {
+        var lastId = $('.message').last().data().messageId
+        $.ajax({
+          url: currentPage,
+          dataType: 'json',
+          data: { id: lastId }
+        })
+        .done(function(res) {
+          res.messages.forEach(function (message, index) {
+            var html = buildHTML(message)
+            appendMessage(html)
+          })
+        })
+        .fail(function(err) {
+        })
+      } else {
+        return
+      }
     } else {
       clearInterval(autoUpdateMessage)
     }
@@ -67,7 +81,6 @@ $(function () {
       appendMessage(html)
       $(".form__input").val('')
       $(".form__submit").attr("disabled", false)
-      scrollLatestMessage()
     })
     .fail(function(err) {
       alert('投稿に失敗しました。' + err)
