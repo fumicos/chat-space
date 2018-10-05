@@ -33,6 +33,23 @@ $(function () {
     }, 'fast');
   }
 
+  function getMessage() {
+    var currentPage = location.pathname
+    var isMessagesPage = currentPage.match(/\/groups\/\d+\/messages/)
+    if (isMessagesPage) {
+      $.ajax({
+        url: currentPage,
+        dataType: 'json'
+      })
+      .done(function(res) {
+      })
+      .fail(function(err) {
+      })
+    } else {
+      clearInterval(autoUpdateMessage)
+    }
+  }
+
   $('#new_message').on('submit', function (e) {
     e.preventDefault()
     var formData = new FormData(this)
@@ -56,4 +73,7 @@ $(function () {
       alert('投稿に失敗しました。' + err)
     })
   })
+
+  // 自動更新
+  var autoUpdateMessage = setInterval(getMessage, 5000)
 })
