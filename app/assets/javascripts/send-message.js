@@ -23,6 +23,16 @@ $(function () {
     return html
   }
 
+  function appendMessage(html) {
+    $(".messages > ul").append(html)
+  }
+
+  function scrollLatestMessage () {
+    $('.messages').animate({
+      scrollTop: $('.messages').get(0).scrollHeight
+    }, 'fast');
+  }
+
   $('#new_message').on('submit', function (e) {
     e.preventDefault()
     var formData = new FormData(this)
@@ -37,12 +47,10 @@ $(function () {
     })
     .done(function(data) {
       var html = buildHTML(data)
-      $(".messages > ul").append(html)
+      appendMessage(html)
       $(".form__input").val('')
       $(".form__submit").attr("disabled", false)
-      $('.messages').animate({
-        scrollTop: $('.messages').get(0).scrollHeight
-      }, 'fast');
+      scrollLatestMessage()
     })
     .fail(function(err) {
       alert('投稿に失敗しました。' + err)
